@@ -1,0 +1,314 @@
+//code structure
+alert('Hello'); alert('World');
+
+
+console.log("Hello World");
+
+//Arrays
+let fruits = ["apple", "banana", "orange"];
+
+fruits.push("mango");   // add
+fruits.pop();           // remove last
+
+console.log(fruits);
+console.log(fruits.length);
+
+//conditional
+let score = 85;
+
+if (score >= 90) {
+  console.log("A grade");
+} else if (score >= 80) {
+  console.log("B grade");
+} else {
+  console.log("C or below");
+}
+
+//Data types
+let aString = "hello";
+let aNumber = 42;
+let aBoolean = true;
+let aNull = null;
+let anUndefined;
+let anObject = { x: 10, y: 20 };
+let anArray = [1, 2, 3];
+
+console.log(typeof aString, typeof aNumber, typeof aBoolean);
+
+//Error handling
+// 1. Basic Error Handling using try...catch
+
+function divide(a, b) {
+    try {
+        if (b === 0) {
+            throw new Error("Division by zero is not allowed");
+        }
+        return a / b;
+    } catch (err) {
+        console.log("Caught error:", err.message);
+        return null; 
+    }
+}
+
+
+// 2. try...catch...finally
+
+
+function readData(data) {
+    try {
+        console.log("Reading data...");
+        if (!data) throw new Error("No data provided");
+        console.log("Data:", data);
+    } catch (err) {
+        console.log("Error while reading data:", err.message);
+    } finally {
+        console.log("Finished operation (success or fail)");
+    }
+}
+
+
+
+// 3. Custom Error Class (Extending Error)
+
+
+class ValidationError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "ValidationError";
+    }
+}
+
+class PermissionError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "PermissionError";
+    }
+}
+
+
+
+// 4. Using Custom Errors
+
+
+function validateUser(user) {
+    if (!user.name) {
+        throw new ValidationError("User must have a name");
+    }
+    if (!user.role) {
+        throw new ValidationError("User must have a role");
+    }
+}
+
+function checkPermission(user, requiredRole) {
+    if (user.role !== requiredRole) {
+        throw new PermissionError(`User lacks required role: ${requiredRole}`);
+    }
+}
+
+
+
+// 5. Testing Error Handling
+
+
+console.log("Divide test:", divide(10, 2));
+console.log("Divide test (error):", divide(10, 0));
+
+readData("Sample text");
+readData(null);
+
+
+const user1 = { name: "Alice", role: "admin" };
+const user2 = { name: "", role: "guest" };
+
+try {
+    validateUser(user1);
+    checkPermission(user1, "admin");
+    console.log("User1 is valid and allowed");
+} catch (err) {
+    console.log(`${err.name}: ${err.message}`);
+}
+
+try {
+    validateUser(user2);
+    checkPermission(user2, "admin");
+} catch (err) {
+    console.log(`${err.name}: ${err.message}`);
+}
+
+
+// 6. Example: catching multiple custom error types
+
+
+function processUser(user) {
+    try {
+        validateUser(user);
+        checkPermission(user, "admin");
+        console.log("User processed successfully");
+    } catch (err) {
+        if (err instanceof ValidationError) {
+            console.log("Validation failed:", err.message);
+        } else if (err instanceof PermissionError) {
+            console.log("Permission denied:", err.message);
+        } else {
+            console.log("Unknown error:", err.message);
+        }
+    }
+}
+
+processUser({ name: "Bob", role: "editor" });  
+processUser({ role: "admin" }); 
+
+//Hello World
+console.log("hello friends");
+console.log("welcome to staytunedLABS");
+
+//Functions
+function checkEvenOdd(num) {
+  if (num % 2 === 0) {
+    console.log(num + " is Even");
+  } else {
+    console.log(num + " is Odd");
+  }
+}
+
+checkEvenOdd(7);
+checkEvenOdd(10);
+
+//Loops
+const numbers = [12, 45, 7, 89, 32];
+let largest = numbers[0];
+
+for (let i = 1; i < numbers.length; i++) {
+  if (numbers[i] > largest) {
+    largest = numbers[i];
+  }
+}
+
+console.log("Largest number is:", largest);
+
+2.for (let i = 1; i <= 5; i++) {
+  console.log("Count:", i);
+}
+
+let n = 5;
+while (n > 0) {
+  console.log(n);
+  n--;
+}
+
+let colors = ["red", "green", "blue"];
+
+for (let color of colors) {
+  console.log(color);
+}
+
+//Objects
+const student = {
+  name: "Pradeep",
+  age: 20,
+  marks: 80,
+  greet: function() {
+    console.log(`Hello, my name is ${this.name}`);
+  }
+};
+
+console.log(student.name);
+student.greet();
+
+//Operators
+let x = 10;
+let y = 3;
+
+console.log(x + y);   
+console.log(x - y);   
+console.log(x * y);   
+console.log(x / y);   
+console.log(x % y);   
+console.log(x ** y);  
+
+//prototypes
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+Person.prototype.sayHi = function () {
+    console.log(`Hi, I am ${this.name}`);
+};
+
+Person.prototype.getAge = function () {
+    return this.age;
+};
+
+
+function Employee(name, age, job) {
+    Person.call(this, name, age);   
+    this.job = job;
+}
+
+
+Employee.prototype = Object.create(Person.prototype);
+
+
+Employee.prototype.constructor = Employee;
+
+Employee.prototype.work = function () {
+    console.log(`${this.name} works as a ${this.job}`);
+};
+
+
+
+
+const animal = {
+    eats: true,
+    walk() {
+        console.log("Animal walks");
+    }
+};
+
+const rabbit = Object.create(animal);
+rabbit.jumps = true;
+
+
+
+const sampleArray = [1, 2, 3];
+const sampleString = "hello";
+
+console.log(sampleArray.__proto__ === Array.prototype); // true
+console.log(sampleString.__proto__ === String.prototype); // true
+
+
+
+
+String.prototype.firstChar = function () {
+    return this[0];
+};
+
+
+
+const dictionary = Object.create(null);
+dictionary.dog = "Animal";
+dictionary.house = "Building";
+
+
+
+
+const p1 = new Person("Alice", 25);
+p1.sayHi();
+console.log(p1.getAge());
+
+const e1 = new Employee("Bob", 30, "Developer");
+e1.sayHi();
+e1.work();
+
+console.log("Rabbit inherits eats:", rabbit.eats);
+rabbit.walk();
+
+console.log("First char of JavaScript:", "JavaScript".firstChar());
+
+console.log("Dictionary keys:", Object.keys(dictionary));
+
+
+console.log(Object.getPrototypeOf(e1));                // Employee.prototype
+console.log(Object.getPrototypeOf(Object.getPrototypeOf(e1))); // Person.prototype
+console.log(Object.getPrototypeOf(sampleArray)); 
