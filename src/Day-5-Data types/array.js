@@ -15,4 +15,4 @@ console.log("After pop:", fruits);
 // Loop through array
 fruits.forEach((item, index) => {
     console.log(`${index}: ${item}`);
-});
+});     
