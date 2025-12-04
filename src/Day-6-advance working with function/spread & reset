@@ -1,0 +1,9 @@
+// Spread + Rest Combo
+
+function multiply(multiplier, ...nums) {
+    return nums.map(num => num * multiplier);
+}
+
+const values = [2, 4, 6, 8];
+
+console.log("Result:", multiply(2, ...values));
